@@ -1,2 +1,4 @@
-javac Program.java
-java Program
+rm -fr out
+mkdir out
+javac -d out src/Program.java
+java -cp out Program
