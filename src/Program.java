@@ -14,7 +14,9 @@ class Program {
             Properties properties = new Properties();
             try {
                properties.load(new FileInputStream("config.properties"));
-            } catch (IOException e) {}
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
 
             String accountSid = properties.getProperty("account-sid");        
             String authToken = properties.getProperty("auth-token");        
@@ -34,7 +36,7 @@ class Program {
             System.out.println(message.getSid());
         }
         catch(TwilioRestException e) {
-            System.out.println(e);
+            throw new RuntimeException(e);
         }
     }
     
