@@ -44,7 +44,6 @@ class Program {
     private void sendSms() {
         TwilioRestClient client = new TwilioRestClient(accountSid, authToken);
      
-        // Build a filter for the MessageList
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("Body", smsMessage));
         params.add(new BasicNameValuePair("To", toNumber));
@@ -52,12 +51,17 @@ class Program {
      
         MessageFactory messageFactory = client.getAccount().getMessageFactory();
 
+        Message message;
+
         try {
-            Message message = messageFactory.create(params);
-            System.out.println(message.getSid());
+            message = messageFactory.create(params);
         }
         catch(TwilioRestException e) {
             throw new RuntimeException(e);
         }
+
+        System.out.println("\n----- Message Details ------");
+        System.out.println("Date Created: " + message.getDateCreated());
+        System.out.println("Status: " + message.getStatus());
     }
 }
