@@ -1,4 +1,4 @@
 rm -fr out
 mkdir out
-javac -cp "lib/*" -d out src/Program.java
-java -cp "lib/*:out" Program
+javac -cp "lib/*" -d out src/*.java
+java -cp "lib/*:out" Main
