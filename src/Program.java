@@ -12,9 +12,11 @@ class Program {
     String authToken;        
     String toNumber;        
     String fromNumber;        
+    String smsMessage;
 
     public void run() {
         loadProperties();
+        readCmdLine();
         sendSms();
     }
 
@@ -28,8 +30,15 @@ class Program {
 
         accountSid = properties.getProperty("account-sid");        
         authToken = properties.getProperty("auth-token");        
-        toNumber = properties.getProperty("to-number");        
         fromNumber = properties.getProperty("from-number");        
+    }
+
+    private void readCmdLine() {
+	System.out.print("Enter number: ");
+	toNumber = System.console().readLine();
+
+        System.out.print("Enter msg: ");
+	smsMessage = System.console().readLine();
     }
 
     private void sendSms() {
@@ -37,7 +46,7 @@ class Program {
      
         // Build a filter for the MessageList
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("Body", "Jenny please?! I love you <3"));
+        params.add(new BasicNameValuePair("Body", smsMessage));
         params.add(new BasicNameValuePair("To", toNumber));
         params.add(new BasicNameValuePair("From", fromNumber));
      
